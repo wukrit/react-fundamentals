@@ -11,10 +11,29 @@
 
     // 🐨 use that function in place of the divs below with:
     // 💰 {message({children: 'Hello World'})} {message({children: 'Goodbye World'})}
+    const PropTypes = {
+      string(props, propName, componentName) {
+        if (!props[propName]) {
+          return new Error(`Prop ${propName} is required.`)
+        }
+      }
+    }
+
+    const Message = ({subject, greeting}) => {
+      return (
+        <React.Fragment>{greeting}, {subject}</React.Fragment>
+      )
+    }
+
+    Message.propTypes = {
+      greeting: PropTypes.string,
+      subject: PropTypes.string
+    }
+
     const element = (
       <div className="container">
-        <div className="message">Hello World</div>
-        <div className="message">Goodbye World</div>
+        <Message greeting="Hello" subject="World" />
+        <Message greeting="Goodbye" subject="World" />
       </div>
     )
 
